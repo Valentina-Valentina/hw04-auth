@@ -80,12 +80,11 @@ const subscribe = async (req, res) => {
     const { subscription } = req.body;
     const result = await User.findOneAndUpdate(_id, { subscription: subscription });
     if (!result) {
-        throw HttpError(500, `Could not update user with id=${_id}`);
+        throw HttpError(404, `Could not update user with id=${_id}`);
     }
 
     res.json({
         user: {
-            "email": email,
             "subscription": result.subscription
         }
     })
